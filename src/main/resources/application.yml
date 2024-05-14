@@ -1,3 +1,4 @@
+#H2 PROFILE
 spring:
   config:
     activate:
@@ -23,6 +24,7 @@ spring:
       enabled: true
       path: /h2-console
 ---
+#로컬용 PROFILE
 spring:
   config:
     activate:
@@ -43,3 +45,25 @@ spring:
         show_sql: true #JPA를 사용해서 DB에 SQL을 날릴 때 SQL을 보여줄건지
         format_sql: true #SQL을 보여준다면 보기좋게 포맷팅을 해서 보여줄지
         dialect: org.hibernate.dialect.MySQL8Dialect #방언, 사투리라는 뜻으로 SQL문법이 조금 다른 경우 SQL을 수정해준다.(현재 mySQL8에 맞게 설정)
+---
+#배포용 PROFILE
+spring:
+  config:
+    activate:
+      on-profile: distribute
+
+  datasource:
+    url: "jdbc:mysql://localhost/library"
+    username: "root"
+    password: "Tmdcks3400**"
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: none
+
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true
+        dialect: org.hibernate.dialect.MySQL8Dialect
